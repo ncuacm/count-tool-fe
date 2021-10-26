@@ -14,17 +14,5 @@ name: "Foot"
 </script>
 
 <style scoped>
-.el-footer {
-  height: 15%;
-  background-color: white;
-  font-size: larger;
-  color: black;
-  text-align: center;
-  line-height: 50px;
-}
-.span{
-  background-color: white;
-  font-weight: bolder;
-}
 
 </style>
