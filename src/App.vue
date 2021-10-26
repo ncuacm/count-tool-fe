@@ -16,6 +16,14 @@ html,body,#app{
   background: white;
 }
 
+#back{
+  position: fixed;
+  display: flex;
+  text-align: left;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
 
 .span{
   background-color: white;
