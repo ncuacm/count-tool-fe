@@ -5,17 +5,17 @@
     </el-header>
     <el-main>
       <div><el-row>
-        <el-button type="success" plain icon="el-icon-edit">
+        <el-button type="success" plain icon="el-icon-edit" @click="ToPostInfo">
           <span>提交队伍比赛信息</span>
         </el-button>
       </el-row></div>
       <div><el-row>
-        <el-button type="success" plain icon="el-icon-search">
+        <el-button type="success" plain icon="el-icon-search" @click="ToQueryInfoBySession">
           <span>查询具体场次的比赛信息</span>
         </el-button>
       </el-row></div>
       <div><el-row>
-        <el-button type="success" plain icon="el-icon-document-checked">
+        <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
           <span>查询队伍的所有比赛信息</span>
         </el-button>
       </el-row></div>
@@ -34,6 +34,17 @@ export default {
   components: {
     Head,
     Foot
+  },
+  methods: {
+    ToPostInfo() {
+      this.$router.push('/contest/submission')
+    },
+    ToQueryInfoBySession() {
+      this.$router.push('/contest/info')
+    },
+    ToQueryInfoByTeam() {
+      this.$router.push('/team/info')
+    }
   }
 }
 </script>
