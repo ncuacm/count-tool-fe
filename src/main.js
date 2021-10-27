@@ -7,6 +7,10 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+var axios = require('axios')
+axios.defaults.baseURL = 'http://localhost:9090'
+Vue.prototype.$axios =axios
+
 new Vue({
   router,
   store,

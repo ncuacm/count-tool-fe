@@ -16,6 +16,8 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.5.0",
     "@vue/cli-service": "^4.5.0",
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [
