@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div style="height: 100%">
     <el-footer>
-      <el-divider></el-divider>
-      <span>NCUACM</span>
+      <div style="height: 10%"><el-divider></el-divider></div>
+      <div><span>NCUACM</span></div>
     </el-footer>
   </div>
 </template>
