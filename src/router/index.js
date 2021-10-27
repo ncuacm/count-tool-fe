@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Submission from '../views/Submission'
 import Contest from '../views/Contest'
 import Team from '../views/Team'
+import Information from "../views/Information";
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/team/info',
     name: 'Team',
     component: Team
+  },
+  {
+    path: '/information',
+    name: 'Information',
+    component: Information
   }
 ]
 

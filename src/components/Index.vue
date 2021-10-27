@@ -1,29 +1,22 @@
 <template>
-  <el-container>
-    <el-header>
-      <Head/>
-    </el-header>
-    <el-main>
-      <div><el-row>
+    <div style="height: 100%">
+      <div style="height: 10%"></div>
+      <div style="height: 25%"><el-row>
         <el-button type="success" plain icon="el-icon-edit" @click="ToPostInfo">
           <span>提交队伍比赛信息</span>
         </el-button>
       </el-row></div>
-      <div><el-row>
+      <div style="height: 25%"><el-row>
         <el-button type="success" plain icon="el-icon-search" @click="ToQueryInfoBySession">
           <span>查询具体场次的比赛信息</span>
         </el-button>
       </el-row></div>
-      <div><el-row>
+      <div style="height: 25%"><el-row>
         <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
           <span>查询队伍的所有比赛信息</span>
         </el-button>
       </el-row></div>
-    </el-main>
-   <el-footer>
-     <Foot/>
-   </el-footer>
-  </el-container>
+    </div>
 </template>
 
 <script>

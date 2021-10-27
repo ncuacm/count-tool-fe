@@ -119,6 +119,9 @@ export default {
       teams: [{
         value: 'int mian',
         label: 'int mian'
+      },{
+        value: 'fakesupernova',
+        label: 'fakesupernova'
       }],
 
       ruleForm: {
@@ -183,7 +186,7 @@ export default {
           });
         }
       });
-    }
+    },
   }
 }
 </script>

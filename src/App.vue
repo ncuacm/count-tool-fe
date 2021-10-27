@@ -34,8 +34,8 @@ html,body,#app{
 .el-main {
   height: 70%;
   color: #333;
+  line-height: 180px;
   text-align: center;
-  line-height: 160px;
   font-size: 12em;
 }
 body > .el-container {
@@ -43,21 +43,21 @@ body > .el-container {
 }
 
 .el-container {
-  height: 95%;
+  height: 94%;
   width: 100%;
 }
 .el-header {
-  height: 15%;
+  height: 20%;
   background-color: white;
   color: deepskyblue;
   text-align: center;
-  line-height: 90px;
+  line-height: 60px;
   font-size: larger;
   font-weight: bolder;
 }
 
 .el-footer {
-  height: 15%;
+  height: 10%;
   background-color: white;
   font-size: larger;
   color: black;
