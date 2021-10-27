@@ -1,55 +1,51 @@
 <template>
-  <el-container>
-    <el-header><Head></Head></el-header>
-    <div style="height: 100%">
-      <div style="height: 11%"></div>
-      <div style="height: 15%">
-        <el-select v-model="platform" placeholder="请选择比赛平台">
-          <el-option
-            v-for="item in platforms"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div style="height: 15%">
-        <el-select v-model="session" placeholder="请选择比赛场次">
-          <el-option
-            v-for="item in sessions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div style="height: 15%">
-        <el-select v-model="team" placeholder="请选择参赛队伍">
-          <el-option
-            v-for="item in teams"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select>
-      </div>
-      <div style="height: 15%; width: 200px; margin: auto">
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
-          <el-form-item prop="rank">
-            <el-input v-model.number="ruleForm.rank"
-            placeholder="请输入队伍排名">
-            </el-input>
-          </el-form-item>
-        </el-form>
-      </div>
-      <div>
-        <el-row>
-          <el-button type="primary" @click="submitInfo('ruleForm')">提交</el-button>
-        </el-row>
-      </div>
+  <div style="height: 100%">
+    <div style="height: 11%"></div>
+    <div style="height: 15%">
+      <el-select v-model="platform" placeholder="请选择比赛平台">
+        <el-option
+          v-for="item in platforms"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
     </div>
-    <el-footer><Foot/></el-footer>
-  </el-container>
+    <div style="height: 15%">
+      <el-select v-model="session" placeholder="请选择比赛场次">
+        <el-option
+          v-for="item in sessions"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
+    <div style="height: 15%">
+      <el-select v-model="team" placeholder="请选择参赛队伍">
+        <el-option
+          v-for="item in teams"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value">
+        </el-option>
+      </el-select>
+    </div>
+    <div style="height: 15%; width: 200px; margin: auto">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="demo-ruleForm">
+        <el-form-item prop="rank">
+          <el-input v-model.number="ruleForm.rank"
+                    placeholder="请输入队伍排名">
+          </el-input>
+        </el-form-item>
+      </el-form>
+    </div>
+    <div>
+      <el-row>
+        <el-button type="primary" @click="submitInfo('ruleForm')">提交</el-button>
+      </el-row>
+    </div>
+  </div>
 </template>
 
 <script>

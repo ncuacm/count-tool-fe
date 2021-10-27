@@ -1,15 +1,12 @@
 <template>
-  <el-container>
-    <el-header><Head/></el-header>
-    <el-main>
-      <div><el-row>
-        <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
-          <span>查询队伍的所有比赛信息</span>
-        </el-button>
-      </el-row></div>
-    </el-main>
-    <el-footer><Foot/></el-footer>
-  </el-container>
+  <div style="height: 100%">
+    <div style="height: 11%"></div>
+    <div><el-row>
+      <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
+        <span>查询队伍的所有比赛信息</span>
+      </el-button>
+    </el-row></div>
+  </div>
 </template>
 
 <script>
