@@ -16,7 +16,7 @@ export default {
     Foot,
     Head,
     QueryInfoByTeam
-  }
+  },
 }
 </script>
 

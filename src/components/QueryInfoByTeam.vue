@@ -31,13 +31,7 @@ export default {
   data() {
     return {
       team: '',
-      teams: [{
-        value: 'int mian',
-        label: 'int mian'
-      },{
-        value: 'fakesupernova',
-        label: 'fakesupernova'
-      }],
+      teams: [],
     }
   },
   methods: {
@@ -45,7 +39,11 @@ export default {
       this.$axios.get('/count-tool/game/team/infos?name=' + this.team).
         then(res => {
           if(res.data.status===200){
-            console.log(res.data.data);
+            this.$store.commit('clear')
+            for(let i = 0; i < res.data.data.msg.length; i++) {
+              this.$store.commit('show', res.data.data.msg[i])
+            }
+            this.ToInformation();
             this.ToInformation();
           }
       }).catch(error => {
@@ -57,7 +55,25 @@ export default {
     },
     ToInformation() {
       this.$router.push('/information')
-    }
+    },
+    getTeams() {
+      this.$axios('/count-tool/game/teams').
+      then(res => {
+        if(res.data.status===200){
+          for(let i = 0; i < res.data.data.msg.length; i++) {
+            this.teams.push({label: res.data.data.msg[i].name, value: res.data.data.msg[i].name})
+          }
+        }
+      }).catch(error =>{
+        this.$message({
+          type: 'error',
+          message: `服务端错误`
+        });
+      })
+    },
+  },
+  mounted: function () {
+    this.getTeams()
   }
 }
 </script>

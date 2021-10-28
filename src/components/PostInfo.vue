@@ -116,13 +116,7 @@ export default {
       }],
 
       team: '',
-      teams: [{
-        value: 'int mian',
-        label: 'int mian'
-      },{
-        value: 'fakesupernova',
-        label: 'fakesupernova'
-      }],
+      teams: [],
 
       ruleForm: {
         rank: '',
@@ -177,7 +171,7 @@ export default {
       });
     },
     errorDeal() {
-      this.$alert("请重试！", "提交失败",{
+      this.$alert("请检查网络或者是否重复提交！", "提交失败",{
         confirmButtonText: '确定',
         callback: action => {
           this.$message({
@@ -187,6 +181,26 @@ export default {
         }
       });
     },
+
+    getTeams() {
+      this.$axios('/count-tool/game/teams').
+        then(res => {
+          if(res.data.status===200){
+            for(let i = 0; i < res.data.data.msg.length; i++) {
+              this.teams.push({label: res.data.data.msg[i].name, value: res.data.data.msg[i].name})
+            }
+          }
+      }).catch(error =>{
+        this.$message({
+          type: 'error',
+          message: `服务端错误`
+        });
+      })
+    }
+  },
+
+  mounted: function (){
+      this.getTeams()
   }
 }
 </script>

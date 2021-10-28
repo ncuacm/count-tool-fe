@@ -8,7 +8,7 @@
         <el-divider></el-divider>
       </div>
       <div style="height: 100%">
-        <el-button id="back" plain icon="el-icon-arrow-left" @click="Back"></el-button>
+        <el-button id="back" type="primary" plain icon="el-icon-arrow-left" @click="Back"></el-button>
       </div>
     </el-header>
   </div>

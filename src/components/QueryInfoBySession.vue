@@ -32,6 +32,7 @@
 <script>
 import Head from './main/Head'
 import Foot from './main/Foot'
+
 export default {
   name: "QueryInfoBySession",
   components: {
@@ -88,10 +89,14 @@ export default {
       this.$axios.get('/count-tool/game/session/infos?platform=' + this.platform + "&session=" + this.session).
         then(res => {
             if(res.data.status===200){
-              console.log(res.data.data);
+              this.$store.commit('clear')
+              for(let i = 0; i < res.data.data.msg.length; i++) {
+                this.$store.commit('show', res.data.data.msg[i])
+              }
               this.ToInformation();
             }
       }).catch(error =>{
+        console.log(error)
         this.$message({
           type: 'error',
           message: `查询失败,请重试!`
@@ -101,7 +106,7 @@ export default {
     ToInformation() {
       this.$router.push('/information')
     }
-  }
+  },
 }
 </script>
 
