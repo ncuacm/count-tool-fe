@@ -44,7 +44,6 @@ export default {
               this.$store.commit('show', res.data.data.msg[i])
             }
             this.ToInformation();
-            this.ToInformation();
           }
       }).catch(error => {
         this.$message({
@@ -60,8 +59,8 @@ export default {
       this.$axios('/count-tool/game/teams').
       then(res => {
         if(res.data.status===200){
-          for(let i = 0; i < res.data.msg.data.length; i++) {
-            this.teams.push({label: res.data.msg.data[i].name, value: res.data.msg.data[i].name})
+          for(let i = 0; i < res.data.data.msg.length; i++){
+            this.teams.push({label: res.data.data.msg[i].name, value: res.data.data.msg[i].name})
           }
         }
       }).catch(error =>{
