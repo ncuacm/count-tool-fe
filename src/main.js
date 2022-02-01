@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(AFTableColumn)
 var axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:8090'
+axios.defaults.baseURL = 'http://localhost:9090'
 Vue.prototype.$axios =axios
 
 new Vue({

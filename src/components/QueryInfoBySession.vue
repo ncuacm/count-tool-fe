@@ -89,6 +89,8 @@ export default {
       this.$axios.get('/count-tool/game/session/infos?platform=' + this.platform + "&session=" + this.session).
         then(res => {
             if(res.data.status===200){
+              // 进行状态的持久化，将我们这次查询到的信息放到store里面
+              // 方便在下一个界面然后进行使用
               this.$store.commit('clear')
               for(let i = 0; i < res.data.data.msg.length; i++) {
                 this.$store.commit('show', res.data.data.msg[i])

@@ -5,6 +5,7 @@ import Submission from '../views/Submission'
 import Contest from '../views/Contest'
 import Team from '../views/Team'
 import Show from "../views/Show";
+import Import from "../views/Import";
 
 Vue.use(VueRouter)
 
@@ -38,6 +39,11 @@ const routes = [
     path: '/information',
     name: 'Information',
     component: Show
+  },
+  {
+    path: '/team/new',
+    name: 'Import',
+    component: Import
   }
 ]
 

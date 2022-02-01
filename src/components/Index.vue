@@ -1,19 +1,24 @@
 <template>
     <div style="height: 100%">
       <div style="height: 10%"></div>
-      <div style="height: 25%"><el-row>
+      <div style="height: 22%"><el-row>
         <el-button type="success" plain icon="el-icon-edit" @click="ToPostInfo">
           <span>提交队伍比赛信息</span>
         </el-button>
       </el-row></div>
-      <div style="height: 25%"><el-row>
+      <div style="height: 21%"><el-row>
         <el-button type="success" plain icon="el-icon-search" @click="ToQueryInfoBySession">
           <span>查询具体场次的比赛信息</span>
         </el-button>
       </el-row></div>
-      <div style="height: 25%"><el-row>
+      <div style="height: 21%"><el-row>
         <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
           <span>查询队伍的所有比赛信息</span>
+        </el-button>
+      </el-row></div>
+      <div style="height: 15%"><el-row>
+        <el-button type="success" plain icon="el-icon-circle-plus-outline" @click="CheckPassword">
+          <span>导入队伍(仅限管理员操作)</span>
         </el-button>
       </el-row></div>
     </div>
@@ -37,6 +42,49 @@ export default {
     },
     ToQueryInfoByTeam() {
       this.$router.push('/team/info')
+    },
+    ToImportNames() {
+      this.$router.push('/team/new')
+    },
+    CheckPassword() {
+      this.$prompt('请输入密码', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
+        // 先对密码进行验证，如果密码正确那么就发起获取所有的队伍的信息的请求
+        this.$axios.post('/count-tool/game/check', {
+          password: value,
+        }).then(res=>{
+          if(res.data.status===200) {
+            this.$message({
+              type: 'success',
+              message: '密码正确'
+            });
+            // 先查询到目前已经知道的队伍的信息，然后进行路由跳转
+            this.$axios.get('/count-tool/game/team/name/all')
+            .then(res=> {
+              if(res.data.status===200){
+                this.$store.commit('clear')
+                for(let i=0;i<res.data.data.msg.length; i++) {
+                  this.$store.commit('showImportTeam', res.data.data.msg[i])
+                }
+              }
+              this.ToImportNames()
+            })
+          }
+        }).catch(error =>{
+          this.$message({
+            type: 'error',
+            message: `密码错误`
+          });
+        })
+
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });
+      });
     }
   }
 }
