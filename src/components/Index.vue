@@ -60,17 +60,17 @@ export default {
               type: 'success',
               message: '密码正确'
             });
-            // 先查询到目前已经知道的队伍的信息，然后进行路由跳转
-            this.$axios.get('/count-tool/game/team/name/all')
-            .then(res=> {
-              if(res.data.status===200){
-                this.$store.commit('clear')
-                for(let i=0;i<res.data.data.msg.length; i++) {
-                  this.$store.commit('showImportTeam', res.data.data.msg[i])
-                }
-              }
-              this.ToImportNames()
-            })
+            // // 先查询到目前已经知道的队伍的信息，然后进行路由跳转
+            // this.$axios.get('/count-tool/game/team/name/all')
+            // .then(res=> {
+            //   if(res.data.status===200){
+            //     this.$store.commit('clear')
+            //     for(let i=0;i<res.data.data.msg.length; i++) {
+            //       this.$store.commit('showImportTeam', res.data.data.msg[i])
+            //     }
+            //   }
+            this.ToImportNames()
+            //})
           }
         }).catch(error =>{
           this.$message({
