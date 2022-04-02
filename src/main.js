@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(AFTableColumn)
 var axios = require('axios')
+//axios.defaults.baseURL = 'http://peterliang.top:8087'
 axios.defaults.baseURL = 'http://localhost:9090'
 Vue.prototype.$axios =axios
 
@@ -18,3 +19,14 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+// 向后台发送数据的时候的拦截器
+axios.interceptors.request.use(function(config) {
+  // 在发送请求之前设置token
+  if (localStorage.getItem("token")) {
+    config.headers.Authorization = 'Bearer ' + localStorage.getItem("token");
+  }
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});

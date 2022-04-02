@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     QueryTeam() {
-      this.$axios.get('/count-tool/game/team/infos?name=' + this.team).
+      this.$axios.get('/count-tool/match/team/infos?name=' + this.team).
         then(res => {
           if(res.data.status===200){
             this.$store.commit('clear')
@@ -56,11 +56,11 @@ export default {
       this.$router.push('/information')
     },
     getTeams() {
-      this.$axios('/count-tool/game/teams').
+      this.$axios.get('/count-tool/match/team/name/all').
       then(res => {
         if(res.data.status===200){
-          for(let i = 0; i < res.data.data.msg.length; i++){
-            this.teams.push({label: res.data.data.msg[i].name, value: res.data.data.msg[i].name})
+          for(let i = 0; i < res.data.data.msg.length; i++) {
+            this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
           }
         }
       }).catch(error =>{

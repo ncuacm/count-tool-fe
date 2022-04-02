@@ -86,7 +86,7 @@ export default {
   },
   methods: {
     QuerySession() {
-      this.$axios.get('/count-tool/game/session/infos?platform=' + this.platform + "&session=" + this.session).
+      this.$axios.get('/count-tool/match/session/infos?platform=' + this.platform + "&session=" + this.session).
         then(res => {
             if(res.data.status===200){
               // 进行状态的持久化，将我们这次查询到的信息放到store里面

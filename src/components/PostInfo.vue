@@ -140,7 +140,7 @@ export default {
       });
     },
     PostInfo() {
-        this.$axios.post('/count-tool/game/add', {
+        this.$axios.post('/count-tool/match/add', {
           "platform": this.platform,
           "session": this.session,
           "name": this.team,
@@ -150,7 +150,7 @@ export default {
             this.confirm(res.data.data.msg, res.data.status)
           }
         }).catch(error => {
-            this.errorDeal()
+            this.errorDeal(error.response.data.data.detail)
         })
     },
     confirm(result) {
@@ -183,11 +183,11 @@ export default {
     },
 
     getTeams() {
-      this.$axios('/count-tool/game/teams').
+      this.$axios('/count-tool/match/team/name/all').
         then(res => {
           if(res.data.status===200){
             for(let i = 0; i < res.data.data.msg.length; i++) {
-              this.teams.push({label: res.data.data.msg[i].name, value: res.data.data.msg[i].name})
+              this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
             }
           }
       }).catch(error =>{

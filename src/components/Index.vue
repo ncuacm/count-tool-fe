@@ -44,7 +44,7 @@ export default {
       this.$router.push('/team/info')
     },
     ToImportNames() {
-      this.$router.push('/team/new')
+      this.$router.push('/admin')
     },
     CheckPassword() {
       this.$prompt('请输入密码', '提示', {
@@ -52,7 +52,7 @@ export default {
         cancelButtonText: '取消',
       }).then(({ value }) => {
         // 先对密码进行验证，如果密码正确那么就发起获取所有的队伍的信息的请求
-        this.$axios.post('/count-tool/game/check', {
+        this.$axios.post('/count-tool/match/check', {
           password: value,
         }).then(res=>{
           if(res.data.status===200) {
@@ -69,6 +69,8 @@ export default {
             //       this.$store.commit('showImportTeam', res.data.data.msg[i])
             //     }
             //   }
+            // 将token放进浏览器缓存里面
+            localStorage.setItem("token", res.data.data.token)
             this.ToImportNames()
             //})
           }
