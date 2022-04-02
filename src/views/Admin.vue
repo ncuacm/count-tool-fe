@@ -67,9 +67,9 @@ export default {
     this.getTeamsList()
   },
   methods: {
-    // 在import界面执行修改队伍名字的方法
+    // 在管理员界面修改队伍的名字
     handleRename(index, row) {
-      this.$prompt('请输入新的队伍名', '提示', {
+      this.$prompt('请输入新的队伍名，同时通知相应的队伍', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(({ value }) => {
@@ -82,9 +82,9 @@ export default {
         });
       });
     },
-    // 在import界面执行修改队伍名字的方法
+    // 在管理员界面修改队伍的密码
     handleRenewPassword(index, row) {
-      this.$prompt('请输入该队伍的新的密码', '提示', {
+      this.$prompt('请输入该队伍的新的密码,同时通知相应的队伍', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(({ value }) => {
@@ -97,7 +97,7 @@ export default {
         });
       });
     },
-    // 执行删除队伍的操作
+    // 在管理员界面执行删除队伍的操作
     handleDelete(index, row) {
       console.log(row.name);
       this.$confirm('此操作将永久删除该队伍的所有信息, 是否继续?', '提示', {
@@ -210,9 +210,7 @@ export default {
       then(res=>{
         if(res.data.status===200){
           // 现在就是要重新进行一个渲染当前的界面了
-          let obj = {}
-          obj.name=name
-          this.tableData.push(obj)
+          this.tableData=res.data.data.msg;
           this.$message({
             type: 'success',
             message: `添加成功`,
