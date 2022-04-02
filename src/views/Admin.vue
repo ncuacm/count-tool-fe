@@ -52,6 +52,7 @@
 <script>
 import Foot from "../components/main/Foot";
 import Head from "../components/main/Head";
+import Global from "../components/Global";
 export default {
   name: "Import",
   components: {
@@ -117,10 +118,7 @@ export default {
               });
             }
           }).catch(error =>{
-          this.$message({
-            type: 'error',
-            message: '删除失败!'
-          });
+            Global.methods.fileOpen(error.response.data.msg.detail)
         })
       }).catch(() => {
         this.$message({
@@ -143,10 +141,7 @@ export default {
           });
         }
       }).catch(error=>{
-        this.$message({
-          type: 'error',
-          message: '更新失败!'
-        });
+        Global.methods.fileOpen(error.response.data.msg.detail)
       })
     },
     // 调用后端接口更新队伍的密码
@@ -165,10 +160,7 @@ export default {
             });
           }
         }).catch(error=>{
-        this.$message({
-          type: 'error',
-          message: '更新失败!'
-        });
+          Global.methods.fileOpen(error.response.data.msg.detail)
       })
     },
     // 调用后端接口获取当前所有的队伍的信息（队伍名和密码）
@@ -179,10 +171,7 @@ export default {
           this.tableData=res.data.data.msg;
         }
       }).catch(error =>{
-        this.$message({
-          type: 'error',
-          message: `加载队伍池队伍失败`,
-        })
+        Global.methods.fileOpen(error.response.data.msg.detail)
       })
     },
     // 获取所有的队伍的名字
@@ -217,10 +206,7 @@ export default {
           })
         }
       }).catch(error=>{
-        this.$message({
-          type: 'error',
-          message: `添加失败`,
-        });
+        Global.methods.fileOpen(error.response.data.msg.detail)
       })
     }
   }

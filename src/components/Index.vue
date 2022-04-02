@@ -3,29 +3,26 @@
       <div style="height: 10%"></div>
       <div style="height: 22%"><el-row>
         <el-button type="success" plain icon="el-icon-edit" @click="ToPostInfo">
-          <span>提交队伍比赛信息</span>
+          <span>提交队伍比赛成绩</span>
         </el-button>
       </el-row></div>
       <div style="height: 21%"><el-row>
         <el-button type="success" plain icon="el-icon-search" @click="ToQueryInfoBySession">
-          <span>查询具体场次的比赛信息</span>
+          <span>查询具体比赛的队伍成绩</span>
         </el-button>
       </el-row></div>
       <div style="height: 21%"><el-row>
         <el-button type="success" plain icon="el-icon-document-checked" @click="ToQueryInfoByTeam">
-          <span>查询队伍的所有比赛信息</span>
+          <span>查询队伍的所有比赛成绩</span>
         </el-button>
       </el-row></div>
       <div style="height: 15%"><el-row>
-<!--        <el-button type="success" plain icon="el-icon-circle-plus-outline" @click="CheckPassword">-->
-<!--          <span>导入队伍(仅限管理员操作)</span>-->
-<!--        </el-button>-->
           <el-button type="success" plain icon="el-icon-circle-plus-outline" @click="dialogFormVisible = true">
             <span>导入队伍(仅限管理员操作)</span>
           </el-button>
-          <el-dialog title="后台管理登录" :visible.sync="dialogFormVisible" width="600px">
+          <el-dialog title="后台管理登录" :visible.sync="dialogFormVisible" width="400px">
             <el-form>
-              <el-form-item label="请输入后台密码" label-width="120px">
+              <el-form-item>
                 <el-input placeholder="请输入密码" v-model="password" autocomplete="off" show-password></el-input>
               </el-form-item>
             </el-form>
