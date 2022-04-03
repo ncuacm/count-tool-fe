@@ -5,7 +5,10 @@ import Submission from '../views/Submission'
 import Contest from '../views/Contest'
 import Team from '../views/Team'
 import Show from "../views/Show";
-import Import from "../views/Admin";
+import AdminTeam from "../views/admin/Team";
+import AdminPlatform from "../views/admin/Platform";
+import AdminData from "../views/admin/Data";
+import Rank from '../views/Rank';
 
 Vue.use(VueRouter)
 
@@ -41,9 +44,24 @@ const routes = [
     component: Show
   },
   {
-    path: '/admin',
-    name: 'Import',
-    component: Import
+    path: '/team/rank',
+    name: 'Rank',
+    component: Rank
+  },
+  {
+    path: '/admin/team',
+    name: 'AdminTeam',
+    component: AdminTeam
+  },
+  {
+    path: '/admin/platform',
+    name: 'AdminPlatform',
+    component: AdminPlatform
+  },
+  {
+    path: '/admin/data',
+    name: 'AdminData',
+    component: AdminData
   }
 ]
 
@@ -54,10 +72,9 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next)=> {
-  if (to.path === '/admin') {
+  if (to.path.match("admin")) {
     // 如果访问的是管理员的界面，那么就先判断是否携带了token，有token就可以放心，没有的话就只能回到主界面
     let token = localStorage.getItem('token')
-    console.log("token" + token)
     token ? next() : next('/')
   } else{
     next()
