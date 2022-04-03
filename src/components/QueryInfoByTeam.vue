@@ -22,6 +22,7 @@
 <script>
 import Head from './main/Head'
 import Foot from './main/Foot'
+import Global from "./Global";
 export default {
   name: "QueryInfoByTeam",
   components: {
@@ -46,10 +47,7 @@ export default {
             this.ToInformation();
           }
       }).catch(error => {
-        this.$message({
-          type: 'error',
-          message: `查询失败,请重试!`
-        });
+        Global.methods.fileOpen(error)
       })
     },
     ToInformation() {
@@ -59,15 +57,14 @@ export default {
       this.$axios.get('/count-tool/match/team/name/all').
       then(res => {
         if(res.data.status===200){
-          for(let i = 0; i < res.data.data.msg.length; i++) {
-            this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
+          if(res.data.data.msg) {
+            for (let i = 0; i < res.data.data.msg.length; i++) {
+              this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
+            }
           }
         }
       }).catch(error =>{
-        this.$message({
-          type: 'error',
-          message: `服务端错误`
-        });
+        Global.methods.fileOpen(error)
       })
     },
   },

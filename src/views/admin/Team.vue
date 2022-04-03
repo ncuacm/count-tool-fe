@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import Foot from "../components/main/Foot";
-import Head from "../components/main/Head";
-import Global from "../components/Global";
+import Foot from "../../components/main/Foot";
+import Head from "../../components/main/Head";
+import Global from "../../components/Global";
 export default {
-  name: "Import",
+  name: "Team",
   components: {
     Foot,
     Head

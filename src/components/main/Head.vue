@@ -1,8 +1,8 @@
 <template>
   <div style="height: 100%">
-    <el-header>
+    <el-header v-model="message">
       <div style="height: 60%">
-        NCUACM暑假集训成绩收集
+        {{message}}
       </div>
       <div style="height: 5%">
         <el-divider></el-divider>
@@ -17,7 +17,15 @@
 <script>
 export default {
   name: "Head",
+  data() {
+    return {
+      message: 'NCUACM暑期集训成绩在线管理平台'
+    }
+  },
   methods: {
+    setMessage(newMessage) {
+      this.message = newMessage;
+    },
     Back() {
       if (window.history.length <= 1) {
         this.$router.push({path:'/'})
@@ -30,7 +38,7 @@ export default {
       // setTimeout(() => {
       //   this.$router.push({path:'/'})
       // },500)
-    }
+    },
   }
 }
 </script>
