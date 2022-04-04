@@ -35,7 +35,7 @@
               <el-button
                 size="mini"
                 type="danger"
-                @click="handleRenewPassword(scope.$index, scope.row)">设置密码</el-button>
+                @click="handleRenewPassword(scope.$index, scope.row)">修改密码</el-button>
               <el-button
                 size="mini"
                 type="danger"
@@ -112,13 +112,12 @@ export default {
             if(res.status===200){
               // 更新这个表格的数据
               this.tableData=res.data.data.teams;
-              this.$message({
-                type: 'success',
-                message: '删除成功!'
-              });
+              Global.methods.successOpen("删除成功")
+            }else{
+              Global.methods.failOpen(res.data.detail)
             }
           }).catch(error =>{
-            Global.methods.fileOpen(error.response.data.detail)
+            Global.methods.errorOpen()
         })
       }).catch(() => {
         this.$message({
@@ -139,9 +138,11 @@ export default {
             type: 'success',
             message: '更新成功!'
           });
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
       }).catch(error=>{
-        Global.methods.fileOpen(error.response.data.msg.detail)
+        Global.methods.failOpen()
       })
     },
     // 调用后端接口更新队伍的密码
@@ -158,9 +159,11 @@ export default {
               type: 'success',
               message: '更新成功!'
             });
+          }else{
+            Global.methods.failOpen(res.data.detail)
           }
         }).catch(error=>{
-          Global.methods.fileOpen(error.response.data.msg.detail)
+          Global.methods.failOpen()
       })
     },
     // 调用后端接口获取当前所有的队伍的信息（队伍名和密码）
@@ -169,9 +172,11 @@ export default {
       .then(res=>{
         if(res.status===200){
           this.tableData=res.data.data.teams;
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
-      }).catch(error =>{
-        Global.methods.fileOpen(error.response.data.detail)
+      }).catch(error=>{
+        Global.methods.failOpen()
       })
     },
     // 获取所有的队伍的名字
@@ -204,9 +209,11 @@ export default {
             type: 'success',
             message: `添加成功`,
           })
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
       }).catch(error=>{
-        Global.methods.fileOpen(error.response.data.detail)
+        Global.methods.failOpen()
       })
     }
   }
