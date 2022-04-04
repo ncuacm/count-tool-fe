@@ -107,18 +107,18 @@ export default {
         type: 'warning'
       }).then(() => {
         // 调用后端接口进行删除操作
-        this.$axios.delete('/count-tool/match/admin/team/name?name='+ row.name)
+        this.$axios.delete('/count_tool/contest/admin/team/name?name='+ row.name)
           .then(res=>{
-            if(res.data.status===200){
+            if(res.status===200){
               // 更新这个表格的数据
-              this.tableData=res.data.data.msg;
+              this.tableData=res.data.data.teams;
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               });
             }
           }).catch(error =>{
-            Global.methods.fileOpen(error.response.data.msg.detail)
+            Global.methods.fileOpen(error.response.data.detail)
         })
       }).catch(() => {
         this.$message({
@@ -130,11 +130,11 @@ export default {
     // 根据删除操作的方法更新对应的队伍的名字
     updateName: function (newName,oldName) {
       // 在后端部分更新对应的队伍的名字
-      this.$axios.put('/count-tool/match/admin/team/name?newname='+newName+"&oldname="+oldName)
+      this.$axios.put('/count_tool/contest/admin/team/name?newname='+newName+"&oldname="+oldName)
       .then(res=>{
-        if(res.data.status===200){
+        if(res.status===200){
           // 更新这个表格的数据
-          this.tableData=res.data.data.msg;
+          this.tableData=res.data.data.teams;
           this.$message({
             type: 'success',
             message: '更新成功!'
@@ -147,13 +147,13 @@ export default {
     // 调用后端接口更新队伍的密码
     updatePassword: function (name,oldPassword, newPassword) {
       // 在后端部分更新对应的队伍的名字
-      this.$axios.put('/count-tool/match/admin/team/password/new', {
+      this.$axios.put('/count_tool/contest/admin/team/password/new', {
         name: name,
         password: newPassword
       }).then(res=>{
-          if(res.data.status===200){
+          if(res.status===200){
             // 更新这个表格的数据
-            this.tableData=res.data.data.msg;
+            this.tableData=res.data.data.teams;
             this.$message({
               type: 'success',
               message: '更新成功!'
@@ -165,13 +165,13 @@ export default {
     },
     // 调用后端接口获取当前所有的队伍的信息（队伍名和密码）
     getTeamsList() {
-      this.$axios.get('/count-tool/match/admin/team/all')
+      this.$axios.get('/count_tool/contest/admin/team/all')
       .then(res=>{
-        if(res.data.status===200){
-          this.tableData=res.data.data.msg;
+        if(res.status===200){
+          this.tableData=res.data.data.teams;
         }
       }).catch(error =>{
-        Global.methods.fileOpen(error.response.data.msg.detail)
+        Global.methods.fileOpen(error.response.data.detail)
       })
     },
     // 获取所有的队伍的名字
@@ -195,18 +195,18 @@ export default {
     },
     // 调用后端接口添加创建单个队伍
     CreateName: function (name) {
-      this.$axios.post('/count-tool/match/admin/team/new?name='+name).
+      this.$axios.post('/count_tool/contest/admin/team/new?name='+name).
       then(res=>{
-        if(res.data.status===200){
+        if(res.status===200){
           // 现在就是要重新进行一个渲染当前的界面了
-          this.tableData=res.data.data.msg;
+          this.tableData=res.data.data.teams;
           this.$message({
             type: 'success',
             message: `添加成功`,
           })
         }
       }).catch(error=>{
-        Global.methods.fileOpen(error.response.data.msg.detail)
+        Global.methods.fileOpen(error.response.data.detail)
       })
     }
   }

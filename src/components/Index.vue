@@ -87,10 +87,10 @@ export default {
     },
     CheckPassword() {
       // 先对密码进行验证，如果密码正确那么就发起获取所有的队伍的信息的请求
-      this.$axios.post('/count-tool/match/check', {
+      this.$axios.post('/count_tool/contest/check', {
         password: this.password,
       }).then(res=>{
-        if(res.data.status===200) {
+        if(res.status===200) {
           // 密码校验成功，可以进行跳转
           Global.methods.successOpen("欢迎你，管理员")
           // 将token放进浏览器缓存里面

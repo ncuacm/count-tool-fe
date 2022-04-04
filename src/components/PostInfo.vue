@@ -113,7 +113,7 @@ export default {
       });
     },
     PostInfo() {
-        this.$axios.post('/count-tool/match/add', {
+        this.$axios.post('/count_tool/match/add', {
           "name": this.platform,
           "team_name": this.team,
           "team_password": this.ruleForm.password,
@@ -143,7 +143,7 @@ export default {
       });
     },
     getTeams() {
-      this.$axios('/count-tool/match/team/name/all').
+      this.$axios('/count_tool/contest/team/name/all').
       then(res => {
         if(res.data.status===200){
           if(res.data.data.msg) {
@@ -157,7 +157,7 @@ export default {
       })
     },
     getPlatforms() {
-      this.$axios('/count-tool/match/name/all').
+      this.$axios('/count_tool/contest/platform/name/all').
       then(res => {
         if(res.data.status===200){
           if(res.data.data.msg) {
