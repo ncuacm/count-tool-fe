@@ -16,10 +16,7 @@ instance.interceptors.request.use(
   },
 
   error => {
-    console.log('请求失败！！')
-    console.log(error)
     return Promise.reject(error)
-
   })
 
 //异步请求后，判断token是否过期
@@ -28,13 +25,7 @@ instance.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response) {
-      switch (error.response.status) {
-        case 401:
-          localStorage.removeItem('token');
-          this.$router.push('/');
-      }
-    }
+    return Promise.resolve(error.response)
   }
 )
 export default instance;

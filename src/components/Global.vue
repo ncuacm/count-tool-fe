@@ -13,8 +13,11 @@ export default {
         type: 'success',
       });
     },
-    fileOpen(error) {
+    failOpen(error) {
       Message.error(error)
+    },
+    errorOpen() {
+      Message.error("系统出错，请联系管理员")
     }
   }
 }

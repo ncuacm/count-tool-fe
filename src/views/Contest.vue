@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import QueryInfoBySession from "../components/QueryInfoBySession"
+import QueryInfoBySession from "../components/QueryInfoByPlatform"
 import Head from '../components/main/Head'
 import Foot from '../components/main/Foot'
 export default {

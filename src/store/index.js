@@ -11,10 +11,9 @@ export default new Vuex.Store({
   mutations: {
     show(state, res) {
       let rankInfo = {
-        platform: res.platform,
-        session: res.session,
         name: res.name,
-        rank: res.rank
+        team_rank: res.team_rank,
+        team_name: res.team_name,
       }
       state.info.push(rankInfo)
     },

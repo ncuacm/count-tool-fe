@@ -106,9 +106,11 @@ export default {
               this.ToAdminData()
               break
           }
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
       }).catch(error =>{
-        Global.methods.fileOpen(error)
+        Global.methods.errorOpen()
       })
     }
   }

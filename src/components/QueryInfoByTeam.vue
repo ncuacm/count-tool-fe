@@ -5,9 +5,9 @@
       <el-select v-model="team" placeholder="请选择参赛队伍">
         <el-option
           v-for="item in teams"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          :key="item.name"
+          :label="item.name"
+          :value="item.name">
         </el-option>
       </el-select>
     </div>
@@ -37,38 +37,41 @@ export default {
   },
   methods: {
     QueryTeam() {
-      this.$axios.get('/count-tool/match/team/infos?name=' + this.team).
+      this.$axios.get('/count_tool/contest/team/info?team=' + this.team).
         then(res => {
-          if(res.data.status===200){
+          if(res.status===200){
             this.$store.commit('clear')
-            for(let i = 0; i < res.data.data.msg.length; i++) {
-              this.$store.commit('show', res.data.data.msg[i])
+            for(let i = 0; i < res.data.data.contests.length; i++) {
+              this.$store.commit('show', res.data.data.contests[i])
             }
             this.ToInformation();
           }
       }).catch(error => {
-        Global.methods.fileOpen(error)
+        Global.methods.failOpen(error)
       })
     },
     ToInformation() {
       this.$router.push('/information')
     },
     getTeams() {
-      this.$axios.get('/count-tool/match/team/name/all').
+      this.$axios('/count_tool/contest/team/name/all').
       then(res => {
-        if(res.data.status===200){
-          if(res.data.data.msg) {
-            for (let i = 0; i < res.data.data.msg.length; i++) {
-              this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
+        if(res.status===200){
+          this.teams=[];
+          if(res.data.data.names) {
+            for(var i=0;i<res.data.data.names.length;i++){
+              this.teams.push({name: res.data.data.names[i] });
             }
           }
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
-      }).catch(error =>{
-        Global.methods.fileOpen(error)
+      }).catch(error=>{
+        Global.methods.errorOpen()
       })
     },
   },
-  mounted: function () {
+  created: function () {
     this.getTeams()
   }
 }

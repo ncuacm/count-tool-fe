@@ -28,14 +28,15 @@
                 size="mini"
                 @click="handleRename(scope.$index, scope.row)">修改比赛平台</el-button>
               <el-button
-                size="mini"
-                type="success"
-                @click="handleChangePlatformStatus(scope.$index, scope.row)" v-if="scope.row.status">上线</el-button>
-              <el-button
                 v-else
                 size="mini"
                 type="danger"
-                @click="handleChangePlatformStatus(scope.$index, scope.row)">下线</el-button>
+                @click="handleChangePlatformStatus(scope.$index, scope.row)" v-if="scope.row.status">下线</el-button>
+              <el-button
+                v-else
+                size="mini"
+                type="success"
+                @click="handleChangePlatformStatus(scope.$index, scope.row)">上线</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -73,12 +74,12 @@ export default {
   methods: {
     // 在管理员界面修改队伍的名字
     handleRename(index, row) {
-      this.$prompt('请输入新的比赛平台的名字', '提示', {
+      this.$prompt('请输入更新后的比赛平台的名字', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
       }).then(({ value }) => {
         // 将数据传输到后端进行持久化
-        this.updatePlatform(value, row.name)
+        this.updatePlatformName(value, row.name)
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -89,7 +90,7 @@ export default {
     // 更新这个比赛平台的状态
     handleChangePlatformStatus(index, row) {
       var message,title;
-      if (!row.status) {
+      if (row.status) {
         // 目前上线，现在需要下线
         message =
           '<p>' + '下线之后队伍将不能提交和查看与此相关的信息。' + '</p>' +
@@ -107,9 +108,22 @@ export default {
         cancelButtonText: '取消',
         type: 'warning',
         dangerouslyUseHTMLString: true,
-      }).then(
-        this.updatePlatform()
-      )
+      }).then(()=>{
+        // 执行更新操作
+        this.$axios.put('/count_tool/contest/admin/platform/status/new', {
+          "name": row.name,
+          "status": row.status===1?0:1,
+        }).then(res=>{
+          if(res.status===200){
+            this.tableData=res.data.data.platforms;
+            Global.methods.successOpen("更新成功")
+          } else{
+            Global.methods.failOpen(res.data.detail)
+          }
+        }).catch(error=>{
+          Global.methods.errorOpen()
+        })
+      })
     },
     // 添加单个比赛平台
     addPlatform: function() {
@@ -118,7 +132,7 @@ export default {
         cancelButtonText: '取消',
       }).then(({ value }) => {
         // 将数据传输到后端进行持久化
-        this.updatePlatform()
+        this.createPlatform(value)
       }).catch(() => {
         this.$message({
           type: 'info',
@@ -127,12 +141,44 @@ export default {
       });
     },
     // 更新这个比赛平台的信息 比赛平台状态或者是比赛平台名字
-    updatePlatform() {
-
+    createPlatform(platform) {
+      this.$axios.post('/count_tool/contest/admin/platform/new?platform=' + platform)
+      .then(res=>{
+        if(res.status===200){
+          this.tableData=res.data.data.platforms;
+          Global.methods.successOpen("添加成功")
+        } else{
+          Global.methods.failOpen(res.data.detail)
+        }
+      }).catch(error=>{
+        Global.methods.errorOpen()
+      })
     },
     // 调用后端接口得到当前的所有的比赛平台的信息
     getPlatforms() {
-
+      this.$axios.get('/count_tool/contest/admin/platform/all')
+      .then(res=>{
+        if(res.status===200){
+          this.tableData=res.data.data.platforms;
+        }else{
+          Global.methods.failOpen(res.data.detail)
+        }
+      }).catch(error=>{
+        Global.methods.errorOpen()
+      })
+    },
+    updatePlatformName(newName,oldName) {
+      this.$axios.put('/count_tool/contest/admin/platform/name/new?old_name='+ oldName+'&new_name=' + newName)
+      .then(res=>{
+        if(res.status===200){
+          this.tableData=res.data.data.platforms;
+          Global.methods.successOpen("更新成功")
+        }else{
+          Global.methods.failOpen(res.data.detail)
+        }
+      }).catch(error=>{
+        Global.methods.errorOpen()
+      })
     }
   }
 }

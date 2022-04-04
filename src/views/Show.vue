@@ -10,21 +10,16 @@
           border
           style="width: 100%">
           <el-table-column
-            prop="platform"
-            label="比赛平台"
-            width="180">
-          </el-table-column>
-          <el-table-column
-            prop="session"
-            label="比赛场次"
-            width="180">
-          </el-table-column>
-          <el-table-column
             prop="name"
+            label="比赛名称"
+            width="180">
+          </el-table-column>
+          <el-table-column
+            prop="team_name"
             label="比赛队伍">
           </el-table-column>
           <el-table-column
-            prop="rank"
+            prop="team_rank"
             label="队伍排名">
           </el-table-column>
         </el-table>

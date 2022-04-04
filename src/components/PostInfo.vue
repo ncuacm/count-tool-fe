@@ -2,12 +2,12 @@
   <div style="height: 100%">
     <div style="height: 11%"></div>
     <div style="height: 15%">
-      <el-select v-model="platform" placeholder="请选择比赛名称">
+      <el-select v-model="platform" placeholder="请选择比赛平台">
         <el-option
           v-for="item in platforms"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          :key="item.name"
+          :label="item.name"
+          :value="item.name">
         </el-option>
       </el-select>
     </div>
@@ -15,9 +15,9 @@
       <el-select v-model="team" placeholder="请选择参赛队伍">
         <el-option
           v-for="item in teams"
-          :key="item.value"
-          :label="item.label"
-          :value="item.value">
+          :key="item.name"
+          :label="item.name"
+          :value="item.name">
         </el-option>
       </el-select>
     </div>
@@ -106,68 +106,79 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 发送数据到后端进行存储
-          this.PostInfo();
+          this.confirm(this.platform, this.team, this.ruleForm.rank)
         } else {
           return false;
         }
       });
     },
     PostInfo() {
-        this.$axios.post('/count_tool/match/add', {
+        this.$axios.post('/count_tool/contest/add', {
           "name": this.platform,
           "team_name": this.team,
-          "team_password": this.ruleForm.password,
+          "team_password": this.ruleForm.password.toString(),
           "team_rank": parseInt(this.ruleForm.rank,10)
         }).then(res => {
-          if(res.data.status===200){
-            this.confirm(res.data.data.match)
+          if(res.status===200){
+              Global.methods.successOpen("提交成功")
+          }else{
+            Global.methods.failOpen(res.data.detail)
           }
         }).catch(error => {
-            Global.methods.fileOpen(error.response.data.detail)
+            Global.methods.errorOpen()
         })
     },
-    confirm(result) {
+    confirm(name, team_name, team_rank) {
       const confirmMessage =
-        '<p>' + '比赛平台: '+result.name + '</p>' +
-        '<p>' + '比赛队伍: '+result.team_name + '</p>' +
-        '<p>' + '队伍排名: '+result.team_rank + '</p>'
-      this.$alert(confirmMessage, '提交成功', {
-        confirmButtonText: '确定',
+        '<p>' + '比赛平台: '+name + '</p>' +
+        '<p>' + '比赛队伍: '+team_name + '</p>' +
+        '<p>' + '队伍排名: '+team_rank + '</p>'
+      this.$confirm(confirmMessage, '提交信息', {
+        confirmButtonText: '提交',
+        cancelButtonText: '取消',
+        type: 'info',
         dangerouslyUseHTMLString: true,
-        callback: action => {
-          this.$message({
-            type: 'success',
-            message: `提交成功`
-          });
-        }
+      }).then(()=>{
+          this.PostInfo();
+      }).catch(()=>{
+        this.$message({
+          type: 'info',
+          message: '已取消提交'
+        });
       });
     },
     getTeams() {
       this.$axios('/count_tool/contest/team/name/all').
       then(res => {
-        if(res.data.status===200){
-          if(res.data.data.msg) {
-            for(let i = 0; i < res.data.data.msg.length; i++) {
-              this.teams.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
+        if(res.status===200){
+          this.teams=[];
+          if(res.data.data.names) {
+            for(var i=0;i<res.data.data.names.length;i++){
+              this.teams.push({name: res.data.data.names[i] });
             }
           }
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
-      }).catch(error =>{
-        Global.methods.fileOpen(error.response.data.data.detail)
+      }).catch(error=>{
+        Global.methods.errorOpen()
       })
     },
     getPlatforms() {
       this.$axios('/count_tool/contest/platform/name/all').
       then(res => {
-        if(res.data.status===200){
-          if(res.data.data.msg) {
-            for(let i = 0; i < res.data.data.msg.length; i++) {
-              this.platforms.push({label: res.data.data.msg[i], value: res.data.data.msg[i]})
+        if(res.status===200){
+          this.platforms=[];
+          if(res.data.data.names) {
+            for(var i=0;i<res.data.data.names.length;i++){
+              this.platforms.push({name: res.data.data.names[i] });
             }
           }
+        }else{
+          Global.methods.failOpen(res.data.detail)
         }
-      }).catch(error =>{
-        Global.methods.fileOpen(error.response.data.data.detail)
+      }).catch(error=>{
+        Global.methods.errorOpen()
       })
     }
   },
