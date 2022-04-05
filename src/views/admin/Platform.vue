@@ -58,14 +58,7 @@ export default {
   },
   data() {
     return {
-      tableData: [{
-        name: '牛客竞赛',
-        // status为true表示上线，false表示下线
-        status: false,
-      },{
-        name: '杭电',
-        status: true,
-      }]
+      tableData: []
     }
   },
   created() {
