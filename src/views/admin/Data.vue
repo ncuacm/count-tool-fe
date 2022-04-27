@@ -23,6 +23,7 @@
 <script>
 import Foot from "../../components/main/Foot";
 import Head from "../../components/main/Head";
+import Global from "../../components/Global";
 export default {
   name: "Data",
   components: {
@@ -53,14 +54,19 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.$axios.get('/count_tool/contest/admin/download/excel')
+        .then(res=>{
+        }).catch(error=>{
+          Global.methods.failOpen()
+        })
         this.$message({
           type: 'success',
-          message: '删除成功!'
+          message: '下载成功'
         });
       }).catch(() => {
         this.$message({
           type: 'info',
-          message: '已取消删除'
+          message: '已取消下载'
         });
       });
     }
