@@ -24,6 +24,8 @@
 import Foot from "../../components/main/Foot";
 import Head from "../../components/main/Head";
 import Global from "../../components/Global";
+import axios from "axios";
+import fileDownload from 'js-file-download';
 export default {
   name: "Data",
   components: {
@@ -54,22 +56,27 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$axios.get('/count_tool/contest/admin/download/excel')
-        .then(res=>{
-        }).catch(error=>{
-          Global.methods.failOpen()
+        this.$axios.get('/count_tool/contest/admin/download/excel', {
+          responseType: 'blob'
+        }).then(res=>{
+          const a = document.createElement('a');
+          let blob = new Blob([res.data],{
+            type: 'application/vnd.ms-excel',
+          });
+          let objectUrl = URL.createObjectURL(blob);
+          a.setAttribute('href', objectUrl);
+          a.setAttribute('download', 'data.xlsx');
+          a.click();
+        }).catch(err=>{
+          this.methods.failOpen(err)
         })
-        this.$message({
-          type: 'success',
-          message: '下载成功'
-        });
       }).catch(() => {
         this.$message({
           type: 'info',
           message: '已取消下载'
         });
       });
-    }
+    },
   }
 }
 </script>
