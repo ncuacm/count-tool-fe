@@ -39,10 +39,20 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$message({
-          type: 'success',
-          message: '删除成功!'
-        });
+        this.$axios.get('/count_tool/contest/admin/download/csv', {
+          responseType: 'blob'
+        }).then(res=>{
+          const a = document.createElement('a');
+          let blob = new Blob([res.data],{
+            type: 'application/vnd.ms-sql',
+          });
+          let objectUrl = URL.createObjectURL(blob);
+          a.setAttribute('href', objectUrl);
+          a.setAttribute('download', 'data.sql');
+          a.click();
+        }).catch(err=>{
+          this.methods.failOpen(err)
+        })
       }).catch(() => {
         this.$message({
           type: 'info',
