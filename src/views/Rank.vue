@@ -32,32 +32,13 @@
 <script>
 import Foot from "../components/main/Foot";
 import Head from "../components/main/Head";
+import Global from "../components/Global";
 export default {
   name: "Rank",
   components: {Head, Foot},
   data() {
     return {
-      tableData: [{
-        name: "字节跳动",
-        score: 123,
-        rank: 1,
-      },{
-        name: "阿里巴巴",
-        score: 100,
-        rank: 2,
-      },{
-        name: "腾讯",
-        score: 90,
-        rank: 3,
-      },{
-        name: "微软",
-        score: 80,
-        rank: 4,
-      },{
-        name: "今日头条",
-        score: 79,
-        rank: 5,
-      }]
+      tableData: []
     }
   },
   created() {
@@ -66,9 +47,19 @@ export default {
   methods: {
     getTeamRank() {
       // 请求后端接口获取队伍排行榜
+      this.$axios.get('/count_tool/contest/team/rank')
+      .then(res=>{
+        if(res.status===200){
+          this.tableData = res.data.data.ranks
+        }else{
+          Global.methods.failOpen(res.data.detail)
+        }
+      }).catch(err=>{
+        Global.methods.failOpen(err)
+      })
     },
     tableRowClassName({row, rowIndex}) {
-      if (rowIndex < 3) {
+      if (row.rank <=3) {
         return 'success-row';
       } else {
         return 'waring-row';
