@@ -55,7 +55,7 @@ export default {
           Global.methods.failOpen(res.data.detail)
         }
       }).catch(err=>{
-        Global.methods.failOpen(err)
+        Global.methods.errorOpen()
       })
     },
     tableRowClassName({row, rowIndex}) {

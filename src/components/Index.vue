@@ -28,7 +28,9 @@
           <el-dialog title="后台管理登录" :visible.sync="dialogFormVisible" width="400px">
             <el-form>
               <el-form-item>
-                <el-input placeholder="请输入后台登录密码" v-model="password" autocomplete="off" show-password></el-input>
+                <el-input placeholder="请输入后台登录密码" v-model="password"
+                          @keyup.enter.native="CheckPassword"
+                          autocomplete="off" show-password></el-input>
               </el-form-item>
               <el-form-item>
                 <el-radio v-model="choice" :label="1">队伍管理</el-radio>

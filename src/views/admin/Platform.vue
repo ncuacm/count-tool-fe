@@ -28,7 +28,6 @@
                 size="mini"
                 @click="handleRename(scope.$index, scope.row)">修改比赛平台</el-button>
               <el-button
-                v-else
                 size="mini"
                 type="danger"
                 @click="handleChangePlatformStatus(scope.$index, scope.row)" v-if="scope.row.status">下线</el-button>

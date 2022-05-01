@@ -52,7 +52,6 @@ export default {
               Global.methods.failOpen(res.data.detail)
             }
       }).catch(error =>{
-        console.log(error)
         Global.methods.errorOpen()
       })
     },
