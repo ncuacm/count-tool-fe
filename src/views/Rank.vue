@@ -15,11 +15,18 @@
             label="队伍名称">
           </el-table-column>
           <el-table-column
-            prop="score"
-            label="队伍积分">
+            prop="preScore"
+            sortable
+            label="队伍加权积分">
+          </el-table-column>
+          <el-table-column
+            prop="allScore"
+            sortable
+            label="队伍总积分">
           </el-table-column>
           <el-table-column
             prop="rank"
+            sortable
             label="队伍排名">
           </el-table-column>
         </el-table>
