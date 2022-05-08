@@ -1,6 +1,11 @@
 <template>
     <div style="height: 100%; font-size: xx-large">
-      <div style="height: 10%"></div>
+      <div style="height: 10%;">
+        <div style="float: left">
+          <el-button @click="clickDialog" type="primary">常见问题</el-button>
+          <FAQ ref="dialog"/>
+        </div>
+      </div>
       <div style="height: 18%"><el-row>
         <el-button type="success" plain icon="el-icon-edit" @click="ToPostInfo">
           <span>提交队伍比赛成绩</span>
@@ -30,6 +35,7 @@
               <el-form-item>
                 <el-input placeholder="请输入后台登录密码" v-model="password"
                           @keyup.enter.native="CheckPassword"
+                          style="width: 350px"
                           autocomplete="off" show-password></el-input>
               </el-form-item>
               <el-form-item>
@@ -50,10 +56,12 @@
 <script>
 import Head from './main/Head'
 import Foot from './main/Foot'
-import Global from "./Global";
+import Global from "./Global"
+import FAQ from "./FAQ"
 export default {
   name: "Index",
   components: {
+    FAQ,
     Head,
     Foot
   },
@@ -61,6 +69,7 @@ export default {
     return {
       dialogTableVisible: true,
       dialogFormVisible: false,
+      dialogFAQVisible: false,
       password: '',
       choice: 2,
     }
@@ -114,11 +123,18 @@ export default {
       }).catch(error =>{
         Global.methods.errorOpen()
       })
+    },
+    clickDialog() {
+      this.$refs.dialog.enableShow=true
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+div.el-dialog__body {
+  padding-top: 0;
+  padding-bottom: 50px;
+}
 </style>
