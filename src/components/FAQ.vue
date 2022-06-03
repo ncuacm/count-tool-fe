@@ -40,6 +40,24 @@
             <p>A: 新的比赛需要后台管理员后台添加，可以提醒后台管理员及时添加.</p>
           </div>
         </div>
+        <div>
+          <h2>积分说明</h2>
+          <el-table
+              :data="rankData"
+              border
+              style="width: 100%">
+            <el-table-column
+                prop="range"
+                label="排名区间"
+                width="240">
+            </el-table-column>
+            <el-table-column
+                prop="score"
+                label="获得积分"
+            >
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
     </el-dialog>
   </div>
@@ -51,6 +69,25 @@ export default {
   data() {
     return {
       enableShow: false,
+      rankData: [{
+        range: '[0,100)',
+        score: '100',
+      }, {
+        range: '[100,300)',
+        score: '80',
+      }, {
+        range: '[300,500)',
+        score: '60',
+      }, {
+        range: '[500,800)',
+        score: '40',
+      },{
+        range: '[800,1000)',
+        score: '20',
+      },{
+        range: '大于等于1000',
+        score: '10',
+      }]
     }
   },
   props: ['enableShow'],
