@@ -2,7 +2,9 @@ import axios from 'axios';
 
 // 创建axios实例
 var instance = axios.create({timeout: 1000 * 12});
-instance.defaults.baseURL = 'http://localhost:9090'
+// 部署打包的文件需要让这行生效
+instance.defaults.baseURL = 'http://peterliang.top:8087'
+//instance.defaults.baseURL = 'http://localhost.top:9090'
 instance.interceptors.request.use(
   config => {
     // console.log(localStorage.getItem('token'))

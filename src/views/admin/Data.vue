@@ -7,7 +7,7 @@
       </el-row></div>
       <div style="height: 21%"><el-row>
         <el-button type="success" plain icon="el-icon-document-copy" @click="ExportDataCSV">
-          <span>导出所有数据的CSV格式(数据无价，请谨慎操作)</span>
+          <span>导出所有数据的SQL脚本(数据无价，请谨慎操作)</span>
         </el-button>
       </el-row></div>
       <div style="height: 21%"><el-row>
