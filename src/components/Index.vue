@@ -31,7 +31,7 @@
             <span>平台管理(仅限管理员操作)</span>
           </el-button>
           <el-dialog title="后台管理登录" :visible.sync="dialogFormVisible" width="400px">
-            <el-form>
+            <el-form @submit.native.prevent>
               <el-form-item>
                 <el-input placeholder="请输入后台登录密码" v-model="password"
                           @keyup.enter.native="CheckPassword"
