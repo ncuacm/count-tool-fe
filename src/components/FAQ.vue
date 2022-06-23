@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <el-dialog :visible.sync="enableShow" width="600px" top="10px" style="margin-bottom: 0">
+    <el-dialog :visible.sync="show" @close="this.closeDialog" width="600px" top="10px" style="margin-bottom: 0">
       <div>
         <div>
           <h2>更新日志</h2>
@@ -60,7 +59,6 @@
         </div>
       </div>
     </el-dialog>
-  </div>
 </template>
 
 <script>
@@ -68,7 +66,6 @@ export default {
   name: "FAQ",
   data() {
     return {
-      enableShow: false,
       rankData: [{
         range: '[0,100)',
         score: '100',
@@ -87,10 +84,23 @@ export default {
       },{
         range: '大于等于1000',
         score: '10',
-      }]
+      }],
+      show: false,
     }
   },
-  props: ['enableShow'],
+  methods: {
+      closeDialog() {
+        this.$emit("closeDialogStatus")
+      }
+  },
+  props: {
+    enableShow: Boolean
+  },
+  watch: {
+    enableShow(newValue, oldValue) {
+      this.show=newValue
+    }
+  }
 }
 </script>
 

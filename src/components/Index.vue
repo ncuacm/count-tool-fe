@@ -3,7 +3,7 @@
       <div style="height: 10%;">
         <div style="float: left">
           <el-button @click="clickDialog" type="primary">常见问题</el-button>
-          <FAQ ref="dialog"/>
+          <FAQ :enableShow="enableShow" @closeDialogStatus="closeDialog"/>
         </div>
       </div>
       <div style="height: 18%"><el-row>
@@ -70,6 +70,7 @@ export default {
       dialogTableVisible: true,
       dialogFormVisible: false,
       dialogFAQVisible: false,
+      enableShow: false,
       password: '',
       choice: 2,
     }
@@ -125,7 +126,10 @@ export default {
       })
     },
     clickDialog() {
-      this.$refs.dialog.enableShow=true
+      this.enableShow=true
+    },
+    closeDialog() {
+      this.enableShow=false
     }
   }
 }
